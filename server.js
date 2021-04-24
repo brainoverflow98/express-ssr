@@ -14,7 +14,7 @@ app.get('*', async (req, res, next) => {
   let fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
   console.log('URL: ' + fullUrl);
   console.log('User-Agnet: ' + userAgent);
-  if (crawler.isCrawler(userAgent))
+  if (userAgent && crawler.isCrawler(userAgent))
   {
     console.log('request from crawler');
     const html = await ssr(req.originalUrl, port);
