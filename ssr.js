@@ -9,7 +9,7 @@ async function ssr(path, port) {
   try {
     if(browser == null)
     {
-      browser = await puppeteer.launch({ headless: true, args: [`--user-agent=Puppeteer SSR`]});
+      browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox', '--user-agent=Puppeteer SSR']});
     }
       
     const url = `http://localhost:${port}${path}`;    
@@ -36,7 +36,8 @@ async function ssr(path, port) {
     console.error(err);
   }
 
-  await page.close();
+  if(page != null)
+    await page.close();
   return html;  
 }
 
