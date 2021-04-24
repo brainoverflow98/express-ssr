@@ -1,0 +1,16 @@
+{
+  "name": "ssr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "es6-crawler-detect": "^3.1.3",
+    "express": "^4.17.1",
+    "puppeteer": "^9.0.0"
+  }
+}
