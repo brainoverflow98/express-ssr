@@ -1,11 +1,10 @@
 const express = require('express');
-const http = require('http');
-const https = require('https');
 const ssr = require('./ssr.js');
 const {Crawler} = require('es6-crawler-detect');
 const path = require('path');
 
 const app = express();
+const port = process.env.PORT || '5000';
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -18,7 +17,7 @@ app.get('*', async (req, res, next) => {
   if (crawler.isCrawler(userAgent))
   {
     console.log('request from crawler');
-    const html = await ssr(req);
+    const html = await ssr(req.originalUrl, port);
     return res.status(200).send(html);
   }
   else
@@ -29,5 +28,5 @@ app.get('*', async (req, res, next) => {
   
 });
 
-http.createServer(app).listen(80, () => console.log('Listening HTTP on port 80'));
-//https.createServer(app).listen(443, () => console.log('Listening HTTPS on port 443'));
+
+app.listen(port, () => console.log(`Server started on Port ${port}`));

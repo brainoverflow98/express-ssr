@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer');
 
 let browser = null;
 
-async function ssr(req) {
+async function ssr(path, port) {
 
   let html = '';
   let page = null
@@ -12,7 +12,7 @@ async function ssr(req) {
       browser = await puppeteer.launch({ headless: true, args: [`--user-agent=Puppeteer SSR`]});
     }
       
-    const url = `http://localhost${req.originalUrl}`;    
+    const url = `http://localhost:${port}${path}`;    
     page = await browser.newPage();
 
     await page.setRequestInterception(true);
